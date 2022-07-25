@@ -1,8 +1,15 @@
 import { Request, Response } from 'express';
-
+import { SequelizeInstance } from '../Instances/mysql';
 import { Product } from '../models/Product';
 
-export const home = (req: Request, res: Response)=>{
+export const home = async (req: Request, res: Response)=>{
+    try{
+        await SequelizeInstance.authenticate();
+        console.log('Connection has been established successfully.');
+    }catch(err){
+        console.error('Unable to connect to the database:', err);
+    }
+
     let age: number = 90;
     let showOld: boolean = false;
 
