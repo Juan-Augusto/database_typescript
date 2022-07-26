@@ -1,14 +1,12 @@
 import { Request, Response } from 'express';
-import { SequelizeInstance } from '../Instances/mysql';
 import { Product } from '../models/Product';
+import { User } from '../models/User';
 
 export const home = async (req: Request, res: Response)=>{
-    try{
-        await SequelizeInstance.authenticate();
-        console.log('Connection has been established successfully.');
-    }catch(err){
-        console.error('Unable to connect to the database:', err);
-    }
+    let users = await User.findAll();
+
+
+
 
     let age: number = 90;
     let showOld: boolean = false;
@@ -26,6 +24,7 @@ export const home = async (req: Request, res: Response)=>{
         showOld,
         products: list,
         expensives: expensiveList,
-        frasesDoDia: []
+        frasesDoDia: [],
+        users
     });
 };
