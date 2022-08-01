@@ -4,12 +4,16 @@ import { Op } from 'sequelize';
 import { User } from '../models/User';
 
 export const home = async (req: Request, res: Response)=>{
+    let searchName: string = 'jua'; 
     let users = await User.findAll({
         where: {
-            name: {
-                [Op.like]: `{%${req.query.name}%}`
+            age: {
+                [Op.gte]: 20
             }
-        }
+        },
+        order: [
+            ['name', 'DESC']
+        ]
     });
 
 
