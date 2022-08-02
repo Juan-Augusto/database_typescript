@@ -1,14 +1,17 @@
 {{>partials/header}}
 
-Opa {{name}} {{lastName}}, tudo bem?
-{{#showOld}}
-    Como vai a vida?
-{{/showOld}}
-{{^showOld}}
-    Beleza?
-{{/showOld}}
-
 <hr/>
+
+<fieldset>
+    <legend>Novo usuário</legend>
+    <form action="/novousuario" method="POST">
+        <label for="name">Nome:</label>
+        <input type="text" name="name" id="name" required><br>
+        <label for="age">Email:</label>
+        <input type="number" name="age" id="age" required><br>
+        <input type="submit" value="Inserir usuário">
+</fieldset>
+
 <h2>Usuários do banco</h2>
 <ul>
     {{#users}}

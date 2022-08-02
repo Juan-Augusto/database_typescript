@@ -4,29 +4,16 @@ import { Op } from 'sequelize';
 import { User } from '../models/User';
 
 export const home = async (req: Request, res: Response)=>{
-    // let searchName: string = 'jua'; 
-    // let users = await User.findAll({
-    //     where: {
-    //         age: {
-    //             [Op.gte]: 20
-    //         }
-    //     },
-    //     order: [
-    //         ['name', 'DESC']
-    //     ],
-    //     offset: 2,
-    //     limit: 5,
-    // });
-    // build + save
-    // const user = User.build({
-    //     name: 'Juan sequilize',
-    //     age: 20
-    // });
-    // await user.save();
-    const user = await User.create({
-        name: 'Juan sequilize create',
-        age: 20
+    await User.update({ age: 18},{
+        where: {
+            age: {
+                [Op.lt]: 18
+            }
+        }
     });
+
+    let users = await User.findAll();
+
 
     let age: number = 90;
     let showOld: boolean = false;
@@ -45,6 +32,16 @@ export const home = async (req: Request, res: Response)=>{
         products: list,
         expensives: expensiveList,
         frasesDoDia: [],
-        //users
+        users
     });
 };
+export const novousuario = async (req: Request, res: Response)=>{
+    let user = await User.create({
+        name: req.body.name,
+        age: req.body.age
+    });
+    res.redirect('/');
+}
+// export const updateUser = async (req: Request, res: Response)=>{
+
+// }
